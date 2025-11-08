@@ -1,26 +1,17 @@
 {%- assign authors = include.authors -%}
 {%- assign has_eq_contrib = false -%}
-{%- assign has_corresponding = false -%}
+{%- assign has_project_lead = false -%}
 
 {%- for _key in authors -%}
-    {%- assign last_char = _key | slice: -1, 1%}
-    {%- assign last_2chars = _key | slice: -2, 2%}
-    {%- if last_2chars == "*#" or last_2chars == "#*" -%}
-        {%- assign key = _key | replace: "#*", "" | replace: "*#", "" -%}
-        {%- assign mark = "*<sup>#</sup>" -%}
+    {%- assign key = _key | replace: "#", "" | replace: "*", "" -%}
+    {%- assign mark = "" -%}
+    {%- if _key contains "*" -%}
         {%- assign has_eq_contrib = true -%}
-        {%- assign has_corresponding = true -%}
-    {%- elsif last_char == "*" -%}
-        {%- assign key = _key | split: "*" | first -%}
-        {%- assign mark = "*" -%}
-        {%- assign has_eq_contrib = true -%}
-    {%- elsif last_char == "#" -%}
-        {%- assign key = _key | split: "#" | first -%}
-        {%- assign mark = '<sup>#</sup>' -%}
-        {%- assign has_corresponding = true -%}
-    {%- else -%}
-        {%- assign key = _key -%}
-        {%- assign mark = "" -%}
+        {%- assign mark = mark | append: "*" -%}
+    {%- endif -%}
+    {%- if _key contains "#" -%}
+        {%- assign has_project_lead = true -%}
+        {%- assign mark = mark | append: '<sup><i class="fas fa-envelope"></i></sup>' -%}
     {%- endif -%}
 
     {%- assign info = site.data.authors[key] -%}
@@ -46,15 +37,3 @@
     {%- endif -%}
 
 {%- endfor -%}
-
-{%- if has_eq_contrib or has_corresponding %}
-<mark>(
-    {%- if has_eq_contrib -%}
-        * <i> equal contribution</i>
-    {%- endif -%}
-    {%- if has_corresponding -%}
-        {%- if has_eq_contrib -%}, {% endif -%}
-        <sup>#</sup> <i> corresponding author</i>
-    {%- endif -%}
-)</mark>
-{%- endif -%}

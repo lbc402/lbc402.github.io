@@ -4,6 +4,31 @@
         {% if include.title %}{{ include.title }}{% else %}<i class="fas fa-star"></i> Selected Recent Publications{% endif %} 
         <a href="{{ 'publications' | relative_url }}">(view all <i class="fas fa-angle-double-right"></i>)</a>
     </h6>
+    {%- assign show_legend_eq = false -%}
+    {%- assign show_legend_pl = false -%}
+    {%- for item in publications limit:include.limit -%}
+        {%- for author_key in item.authors -%}
+            {%- if author_key contains "*" -%}{%- assign show_legend_eq = true -%}{%- endif -%}
+            {%- if author_key contains "#" -%}{%- assign show_legend_pl = true -%}{%- endif -%}
+        {%- endfor -%}
+    {%- endfor -%}
+    <div class="px-3">
+    {% if show_legend_eq or show_legend_pl %}
+    <div class="small pt-3">
+          <span class="p-1 rounded" style="background-color: #fffbea;">
+            (
+            {%- if show_legend_eq -%}
+                * <i>equal contribution</i>
+            {%- endif -%}
+            {%- if show_legend_pl -%}
+                {%- if show_legend_eq -%}, {% endif -%}
+                <sup><i class="fas fa-envelope"></i></sup> <i>project lead</i>
+            {%- endif -%}
+            )
+          </span>
+      </div>
+    {% endif %}
+    </div>
     {% for item in publications limit:include.limit %}
         {% include widgets/publication_item.html item=item first=false last=false %}    
     {% endfor %}

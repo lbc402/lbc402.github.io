@@ -31,3 +31,9 @@ gem "wdm", "~> 0.2" if Gem.win_platform?
 
 gem "webrick", "~> 1.7"
 gem "kramdown-parser-gfm"
+
+# 手动添加 Ruby 3.4+ 移除的默认库
+gem "logger"   # 解决 logger 警告
+gem "base64"   # 解决 base64 加载失败
+gem "safe_yaml" # 确保 safe_yaml 依赖正确
+gem "bigdecimal", "~> 3.1.6"  # 明确指定一个兼容版本

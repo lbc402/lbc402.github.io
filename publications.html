@@ -10,6 +10,30 @@ body_attr: >-
 
 <div class="row">
     <div class="col-12 col-lg-10">
+        {%- assign show_legend_eq = false -%}
+        {%- assign show_legend_pl = false -%}
+        {%- for item in site.publications -%}
+            {%- for author_key in item.authors -%}
+                {%- if author_key contains "*" -%}{%- assign show_legend_eq = true -%}{%- endif -%}
+                {%- if author_key contains "#" -%}{%- assign show_legend_pl = true -%}{%- endif -%}
+            {%- endfor -%}
+        {%- endfor -%}
+        {% if show_legend_eq or show_legend_pl %}
+        <div class="small mb-3">
+            <span class="p-1 rounded" style="background-color: #fffbea;">
+                (
+                {%- if show_legend_eq -%}
+                    *&nbsp;<i>equal contribution</i>
+                {%- endif -%}
+                {%- if show_legend_pl -%}
+                    {%- if show_legend_eq -%}, {% endif -%}
+                    <sup><i class="fas fa-envelope"></i></sup>&nbsp;<i>project lead</i>
+                {%- endif -%}
+                )
+            </span>
+        </div>
+        {% endif %}
+
         {% for year in pubs_by_year %}
         {% assign num_papers = year.items | size %}
         <h2 class="pt-4" id="year-{{ year.name }}">{{ year.name }}</h2>

@@ -10,7 +10,12 @@
             <div class="media-body">
                 {% for item in year.items %}
                 <div class="my-1 d-flex">
-                    <div>{{ item.title }}</div>
+                    <div class="flex-fill">
+                         {{ item.title | markdownify | remove: '<p>' | remove: '</p>' | strip }}
+                         {%- if item.github_stars_repo -%}
+                         <span style="vertical-align: middle;">&nbsp;<a class="github-button" href="https://github.com/{{ item.github_stars_repo }}" data-icon="octicon-mark-github" data-show-count="true" aria-label="Star {{ item.github_stars_repo }} on GitHub">Stars</a></span>
+                         {%- endif -%}
+                     </div>
                     <div class="ml-auto mt-auto text-muted no-break"><i>{{ item.date | date: "%b %d" }}</i></div>
                 </div>
                 {% endfor %}
