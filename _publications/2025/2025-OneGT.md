@@ -5,7 +5,7 @@ selected:       true
 pub:            "ICCV"
 pub_date:       "2025"
 abstract:      "We present OneGT that adheres to the frameworks of the rendering tools, while restructuring individual stages of the rendering pipeline through neural networks"
-cover:  "/assets/images/covers/OneGT.png"
+cover:  "/assets/images/covers/onegt.png"
 authors:
   - "Jinshu Chen"
   - "Bingchuan Li#"
