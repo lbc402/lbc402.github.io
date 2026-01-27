@@ -1,9 +1,9 @@
 ---
 title:          "Phantom-Data: Towards a General Subject-Consistent Video Generation Dataset"
 date:           2025-06-23
-pub:            Arxiv
+pub:            ICLR
 pub_last:       ''
-pub_date:       "2025"
+pub_date:       "2026"
 selected:       true
 award:          
 abstract:       To address the subject-background entanglement in subject-to-video generation, we introduce Phantom-Data, the first general-purpose cross-pair consistency dataset, which significantly improves prompt alignment and visual quality while preserving identity.
