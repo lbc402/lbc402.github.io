@@ -1,7 +1,7 @@
 ---
 title:          "HyperLoRA: Parameter-Efficient Adaptive Generation for Portrait Synthesis"
 date:           2025-03-21
-selected:       true
+selected:       false
 pub:            "CVPR"
 pub_date:       "2025"
 abstract: >-
